@@ -5,6 +5,8 @@ import os
 token = eval(open("secrets","r").read())
 token=token["dckey"]
 
+danger_list=['''"''',"'","\\"]
+
 help='''CVBot Commands Start with a '&'
 &help -> Show this help screen
 &choices -> Select CV Template
@@ -21,14 +23,19 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-  if message.content.startswith("&help"):
+  secure_text=message.content
+  for danger in danger_list:
+    secure_text=secure_text.replace(danger,"")
+  print(secure_text)
+
+  if secure_text.startswith("&help"):
     await message.channel.send(help)
 
-  if message.content.startswith("&choices"):
+  if secure_text.startswith("&choices"):
     b="".join(choicelist)
     await message.channel.send(b)
 
-  if message.content.startswith("&1"):
+  if secure_text.startswith("&1"):
     await message.channel.send("Send your Data in the following format  : ")
     await message.channel.send('''```&Start
 <name>{Your Name}</name>

@@ -17,6 +17,7 @@ client=discord.Client()
 @client.event
 async def on_ready():
   print("Ready Steady po")
+  await client.change_presence(activity=discord.Game(name="  &help"))
 
 @client.event
 async def on_message(message):

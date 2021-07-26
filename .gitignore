@@ -1,2 +1,4 @@
 /payloads
+/tests
+/__pycache__
 secrets

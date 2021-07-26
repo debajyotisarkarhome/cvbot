@@ -40,23 +40,22 @@ async def on_message(message):
     await message.channel.send('''```&start
 <name>{Your Name}</name>
 <email>{Your email}</email>
-<exp>{expirience heading}{expirience details}</exp>
-<exp>{expirience heading}{expirience details}</exp>
+<exp>{experience heading}{experience details}</exp>
+<exp>{experience heading}{experience details}</exp>
 .
 .
 <edu>{education heading}{education details}</edu>
 <edu>{education heading}{education details}</edu>
 .
 .
-<pro>{project heading}{project details}</edu>
-<pro>{project heading}{project details}</edu>```''')
+<pro>{project heading}{project details}</pro>
+<pro>{project heading}{project details}</pro>```''')
 
   if secure_text.startswith("&start"):
-    print("gotit")
+    print("$ Received job")
     userdat=secure_text.replace("&start","")
     filename=cvmaker.template1(httex2json.httex2json(userdat))
-    await message.channel.send("Here is your cv  🤩📄")
-    await message.channel.send(file=discord.File(filename))
+    await message.channel.send("Here is your cv  🤩📄",file=discord.File(filename))
 
     
 

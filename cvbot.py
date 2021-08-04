@@ -35,9 +35,9 @@ async def on_message(message):
     b="".join(choicelist)
     await message.channel.send(b)
 
-  if secure_text.startswith("&1"):
+  if secure_text.startswith("&1") or secure_text.startswith("&SimpleCV") or secure_text.startswith("&1.SimpleCV"):
     await message.channel.send("Send your Data in the following format  : ")
-    await message.channel.send('''```&start
+    await message.channel.send('''```&make1 
 <name>{Your Name}</name>
 <email>{Your email}</email>
 <exp>{experience heading}{experience details}</exp>
@@ -49,11 +49,15 @@ async def on_message(message):
 .
 .
 <pro>{project heading}{project details}</pro>
-<pro>{project heading}{project details}</pro>```''')
+<pro>{project heading}{project details}</pro>
+.
+.
+<link>{Facebook}{www.facebook.com/you}</link>
+<link>{Twitter}{www.twitter.com/you}</link>```''')
 
-  if secure_text.startswith("&start"):
+  if secure_text.startswith("&make1"):
     print("$ Received job")
-    userdat=secure_text.replace("&start","")
+    userdat=secure_text.replace("&make1","")
     filename=cvmaker.template1(httex2json.httex2json(userdat))
     await message.channel.send("Here is your cv  🤩📄",file=discord.File(filename))
 

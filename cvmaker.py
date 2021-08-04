@@ -1,11 +1,12 @@
 from pylatex import Document, Section, Subsection, MiniPage, LargeText, LineBreak, MediumText, HugeText, Command
-from pylatex.utils import italic, NoEscape, bold
+from pylatex.utils import italic, NoEscape, bold, escape_latex
 import uuid
 
 TEMPLATE1_FORMAT=    '''inp={"basic_details":{"name":"<name>","email":"<email>"},
             "experience":   {"exp1":"details","exp2":"details"},
             "education" :   {"ed1":"details","ed1":"details"},
             "projects"  :   {"pro1":"details","pro2":"details"},
+            "link"      :   {"Facebook": "www.faacebook.com"}
             }'''
 
 def template1(inp):
@@ -13,6 +14,13 @@ def template1(inp):
     doc=Document(geometry_options=geometry_options)
 
     doc.preamble.append(NoEscape("\\usepackage{indentfirst}"))
+    doc.packages.append(NoEscape("\\usepackage{hyperref}"))
+
+    def hyperlink(url,text):
+        text = escape_latex(text)
+        if url[0:3]!="www.":
+            url="www."+url
+        return NoEscape(r'\href{' + url + '}{' + text + '}')
 
     with doc.create(MiniPage(align='r')):
         doc.append(HugeText(bold(inp["basic_details"]["name"])))
@@ -33,6 +41,11 @@ def template1(inp):
             for i in inp["projects"].keys():
                 with doc.create(Subsection(i)):
                     doc.append(inp["projects"][i])
+    if not inp["link"]=={}:
+        with doc.create(Section("LINKS: ")):
+            for i in inp["link"].keys():
+                doc.append(MediumText(hyperlink(inp["link"][i],i)))
+    
 
     filename=str(uuid.uuid1())
     doc.generate_pdf("payloads/"+filename)

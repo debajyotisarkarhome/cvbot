@@ -4,7 +4,7 @@ ERROR_CODES='''0x001 : No Name
 0x002 : No Email'''
 
 def httex2json(data):
-    response={"basic_details":{},"experience":{},"education":{},"projects":{},"error":[]}
+    response={"basic_details":{},"experience":{},"education":{},"projects":{},"link":{},"error":[]}
     name_start_index=data.find("<name>")
     if name_start_index!=-1:
         name=data[name_start_index+6:data.find("</name>")]
@@ -32,5 +32,9 @@ def httex2json(data):
     for pro in re.findall("<pro>(.*?)</pro>",data):
         pro_undecoded=re.findall("{(.*?)}",pro)
         response["projects"][pro_undecoded[0]]=pro_undecoded[1]
+
+    for link in re.findall("<link>(.*?)</link>",data):
+        link_undecoded=re.findall("{(.*?)}",link)
+        response["link"][link_undecoded[0]]=link_undecoded[1]
 
     return response

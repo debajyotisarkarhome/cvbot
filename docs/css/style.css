@@ -60,6 +60,7 @@ svg {
   stroke-dasharray: 150 480;
   stroke-dashoffset: 150;
   transition: 1s ease-in-out;
+  pointer-events: none;
 }
 
 .btn:hover {

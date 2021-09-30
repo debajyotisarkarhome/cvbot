@@ -1,10 +1,11 @@
-import discord
 import os
-import httex2json,cvmaker
+import discord
+import httex2json
+import cvmaker
 
+from dotenv import load_dotenv
 
-token = eval(open("secrets","r").read())
-token=token["dckey"]
+load_dotenv()
 
 danger_list=['''"''',"'","\\"]
 
@@ -64,4 +65,4 @@ async def on_message(message):
     
 
 
-client.run(token)
+client.run(os.getenv('DISCORD_TOKEN'))

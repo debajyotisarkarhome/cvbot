@@ -58,4 +58,4 @@ Add your name to the `CONTRIBUTORS.md` file using the below convention:
 - Push your work into my small project!
 
 
-Repo Owner - [Debajyoti Sarkar](https://github.com/debajyotisarkarhome)
+Repo Maintained by - [Debajyoti Sarkar](https://github.com/debajyotisarkarhome), [Sayantani Deb](https://github.com/SayantaniDeb)

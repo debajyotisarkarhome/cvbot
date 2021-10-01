@@ -25,6 +25,10 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+  # we do not want the bot to reply to itself
+  if message.author == client.user:
+    return
+
   secure_text=message.content
   for danger in danger_list:
     secure_text=secure_text.replace(danger,"")
